@@ -1,0 +1,135 @@
+    <!DOCTYPE html>
+<html>
+    <head>
+        <title>Markdown Previewer</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <meta name="keywords" content="HTML, CSS, JavaScript">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <meta charset="UTF-8">
+        <style> /* CSS GOES HERE */
+            body{
+                background-color: aqua;
+                color: #05396b;
+            }
+            blockquote {
+                border-left: 3px solid #224b4b;
+                color: #224b4b;
+                padding-left: 5px;
+                margin-left: 25px;
+            }
+            code {
+                background: white;
+                font-size: 0.875rem;
+                font-weight: bold;
+            }
+            pre {
+                display: block;
+                overflow: auto;
+                background: white;
+                padding: 5px;
+                line-height: 1.2;
+            }
+            #textEditor{
+                background-color: #389583;
+                color: #fff;
+                
+            }
+            #textpreview{
+                
+            }
+            #editor{
+                height: 90%;
+            }
+            #preview{
+                background-color: #5cdb94;
+                padding: 1.2vh;
+                border-radius: 1vh;
+                height: 90%;
+            }
+            img{
+                max-width: 20vh;
+                
+            }
+        </style>
+        <script> /* JAVASCRIPT GOES HERE */
+            
+            function UpdatePreview(){
+                document.getElementById("preview").innerHTML = marked.parse(document.getElementById("editor").value);
+            }
+
+            function Start(){
+                document.getElementById("editor").value = 
+                
+                `\
+# This is a h1
+
+## This is a h2
+### All of this made with bootstrap:
+
+And the code of: \`marked.parse()\`,
+
+\`\`\`
+// Here is some multiline code:
+
+function Example() {
+ return multiLineCode;
+}
+\`\`\`
+
+**This is a bold text**.
+_This is an italic text_.
+**_This is both_**
+
+
+[This is a Link](https://www.freecodecamp.org)
+> This is a Block Quote!
+
+
+- This is a list.
+  - bulleted.
+     - With different indentation levels.
+
+
+1. And there are numbered lists too.
+1. Use just 1s if you want!
+
+
+![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
+                `
+                UpdatePreview();
+            }
+
+            
+        </script>
+    </head>
+    <body onload="Start()">
+        <head>  
+            <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+            <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        </head>
+        <main>         
+            <div class="container-fluid">
+                <div class="row bg-info">
+                    <h1 class="text-center">MarkDown Previewer made with Bootstrap</h1>
+                </div>
+                <div class="row">
+                    <div id="texteditor" class="col-6">
+                        <h2 class="text-center m-2">Editor</h2>
+                        <textarea id="editor" class="form-control" onkeyup="UpdatePreview()">
+                            
+                        </textarea>
+                    </div>
+                    <div id="textpreview" class="col-6">
+                        <h2 class="text-center m-2">Preview</h2>
+                        <div id="preview">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

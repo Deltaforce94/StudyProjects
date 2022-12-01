@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<head>
+    <title>Random Quote Machine</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <style>  /* CSS GOES HERE */
+        * {
+            text-align: center;
+            font-family: "Papyrus", "Times New Roman";
+        }
+        wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+            background-color: #abd699;
+            max-width: 60%;
+            border-radius: 10px;
+            border: 0.5px solid black;               
+        }
+        body{
+            background-color: #c7ddcc;
+        }
+        #inside{
+                     
+            margin: 1vh;
+        }
+        #tweet-quote, #new-quote{
+            color: #16123f;
+            font-size: 110%;
+        }
+        h1{
+            color: #ffe26a;
+            
+        }
+        a{
+            color: #fff;
+        }
+        #text{
+            font-size: 130%;
+        }
+        #author{
+            font-size: 140%;
+            text-align: right;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+    </style>
+    <script>  /* JavaScript GOES HERE */
+        const RANDOMQUOTE = [
+            "Don’t explain your philosophy. Embody it.",
+            "Hardship often prepares an ordinary person for an extraordinary destiny.",
+            "There is no easy way from the earth to the stars.",
+            "Every man is a creature of the age in which he lives and few are able to raise themselves above the ideas of the time.",
+            "You have power over your mind, not outside events. Realize this, and you will find strength.",
+            "Life is never made unbearable by circumstances, but only by lack of meaning and purpose.",
+            "The highest activity a human being can attain is learning for understanding, because to understand is to be free.",
+            "The most beautiful experience we can have is the mysterious. It is the fundamental emotion that stands at the cradle of true art and true science.",
+            "Life must be understood backward. But it must be lived forward .",
+            "The flame that burns Twice as bright burns half as long.",
+            "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
+            "Those who educate children well are more to be honored than they who produce them; for these only gave them life, those the art of living well.",
+            "Never let your sense of morals prevent you from doing what is right.",
+            "The happiness of your life depends upon the quality of your thoughts.",
+            "Freedom is secured not by the fulfilling of one’s desires, but by the removal of desire.",
+            "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.",
+            "The greater the difficulty, the more glory in surmounting it.",
+            "The brave man is he who overcomes not only his enemies but his pleasures",
+            "All that is necessary for the triumph of evil is that good men do nothing.",
+            "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+
+        ];
+        const RANDOMAUTHOR = [
+            "Epictetus",
+            "Christopher Markus",
+            "Seneca",
+            "Voltaire",
+            "Marcus Aurelius",
+            "Victor Frankl",
+            "Baruch Spinoza",
+            "Albert Einstein",
+            "Søren Kierkegaard",
+            "Lao Tzu",
+            "Marcus Aurelius",
+            "Aristotle",
+            "Isaac Asimov",
+            "Marcus Aurelius",
+            "Epictetus",
+            "Marcus Aurelius",
+            "Epicurus",
+            "Democritus",
+            "Edmun Burke",
+            "Aristotle"
+        ];
+        function getRandomInt(max){
+            return Math.floor(Math.random() * max);
+        }
+        function getRandomQuote(){
+            var random = getRandomInt(RANDOMQUOTE.length);
+            document.getElementById("text").innerText = RANDOMQUOTE[random];
+            document.getElementById("author").innerText = RANDOMAUTHOR[random];
+        }
+        function getTwitterLink(){
+            document.getElementById("tweet-quote").setAttribute("href", "https://twitter.com/intent/tweet?text="+"'"+document.getElementById("text").innerText+"' "+document.getElementById("author").innerText);
+        }
+
+        window.onload = init;
+        function init() {
+            getRandomQuote();
+        }
+    </script>
+    <meta charset="UTF-8">    
+    <meta name="keywords" content="HTML, CSS, JavaScript">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+</head>
+<body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <main>
+        <wrapper id="quote-box">
+            <div id="inside">
+                <h1>Philosophers Quotes</h1>
+                <p id="text">
+                    
+                </p>
+                <p id="author">
+
+                </p>
+                <button id="new-quote" type="button" class="btn-success" onclick="getRandomQuote();"><a>New Quote</a></button>
+                <button type="button" class="btn-primary"><a id="tweet-quote" target="_top" onclick="getTwitterLink()" href="#">Twit this!</a></button>
+            </div>
+        </wrapper>
+    </main>
+</body>
+</html>
