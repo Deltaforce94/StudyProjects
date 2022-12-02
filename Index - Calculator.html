@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en"A>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>JavaScript Calculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <style> /* CSS GOES HERE */
+
+            *{
+                color: white
+            }
+            .container{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+                background-color: #08081c;
+                padding: 5vh;
+                border-radius: 10px;
+                border: 0.5px solid black;
+                max-width: 50vh;  
+            }
+            .row {
+                display: flex;
+                justify-content: center;
+                          
+            }
+            .btn{
+                border: 0.5px solid black;
+                width: 6vh;
+                height: 6vh;
+            }
+            .btn-secondary{
+                width: 12vh;
+            }
+            #display-container{
+                border: 0.5px solid white;
+                padding: 0.5vh;
+            }
+            .display{
+                text-align: right;
+            }
+             
+
+        </style>
+        <script> /* JAVASCRIPT GOES HERE */
+
+            var displayText = "0";
+            var finalDisplayText = "";
+            var lastInput = "0";
+            var isDecimal = false;
+            var newOperation = false;
+            var canBeNegative = true;
+            var currentNum = 0;
+            var finalNum = 0;
+            
+
+            function updateDisplay(){
+                document.getElementById("display").innerHTML = displayText;
+            }
+
+            function updateFinalDisplay(value){
+                if(value == 0){
+                    document.getElementById("final-display").innerHTML = "";
+                    finalNum = value;
+                }else{
+                    document.getElementById("final-display").innerHTML = value;
+                    finalNum = value;
+                }    
+            }
+
+            function updateOperationDisplay(value){
+                document.getElementById("operation-display").innerHTML = value;
+            }
+
+            function calculate(input){
+                if(finalNum == 0){
+                    finalNum += currentNum;
+                }
+                else if(document.getElementById("operation-display").innerHTML == "+"){
+                finalNum += currentNum;
+                }
+                else if(document.getElementById("operation-display").innerHTML == "-"){
+                finalNum -= currentNum;
+                }
+                else if(document.getElementById("operation-display").innerHTML == "*"){
+                finalNum *= currentNum;
+                }
+                else if(document.getElementById("operation-display").innerHTML == "/"){
+                finalNum /= currentNum;
+                }
+                console.log(finalNum);
+                currentNum = 0;
+
+                updateOperationDisplay(input);                      
+                                             
+                updateFinalDisplay(finalNum);
+                displayText = "0";
+                isDecimal = false;
+                newOperation = false;
+                canBeNegative = true;   
+
+            }
+
+
+            function addToDisplay(input){
+                if(input == "+"){
+                    if(displayText != "0" && lastInput != "+" && lastInput != "-" && lastInput != "/" && lastInput != "*"){
+                        currentNum = parseFloat(displayText);
+                        calculate(input);                    
+                    }
+                    else if(displayText == "0" || displayText == "-"){
+                        updateOperationDisplay(input);
+                        displayText = 0;
+                    }  
+                }
+                else if(input == "/"){
+                    if(displayText != "0" && lastInput != "+" && lastInput != "-" && lastInput != "/" && lastInput != "*"){
+                        currentNum = parseFloat(displayText);
+                        calculate(input);
+                   
+                    }
+                    else if(displayText == "0" || displayText == "-"){
+                        updateOperationDisplay(input);
+                        displayText = 0;
+                    } 
+                }
+                else if(input == "*"){
+                    if(displayText != "0" && lastInput != "+" && lastInput != "-" && lastInput != "/" && lastInput != "*"){
+                        currentNum = parseFloat(displayText);
+                        calculate(input);
+                        
+                    }
+                    else if(displayText == "0" || displayText == "-"){
+                        updateOperationDisplay(input);
+                        displayText = 0;
+                    } 
+                }
+                else if(input == "-"){
+                    if(lastInput != "-"){
+                        if(canBeNegative){
+                            displayText = input.toString();
+                            canBeNegative = false;
+                        }
+                        else{
+                            currentNum = parseFloat(displayText);
+                            calculate(input);                    
+                        }    
+                    } 
+                }
+                else if(input == "."){
+                    if(lastInput != "+" && lastInput != "-" && lastInput != "/" && lastInput != "*" && lastInput != "*" && lastInput != "." && !isDecimal){
+                        displayText += input.toString();
+                        isDecimal = true;                        
+                    } 
+                }
+                else if(input == "="){
+                    if(lastInput != "+" && lastInput != "-" && lastInput != "/" && lastInput != "*" && lastInput != "*" && lastInput != "."){
+                        currentNum = parseFloat(displayText);
+                        calculate();
+                        displayText = finalNum;
+                        updateOperationDisplay("");
+                        updateFinalDisplay(0);
+                        newOperation = true;                                           
+                    } 
+                }
+                else if(displayText == "0" && input != "-" || newOperation){
+                    displayText = input.toString();
+                    newOperation = false;
+                    canBeNegative = false;
+                }else{
+                    displayText += input.toString();
+                    canBeNegative = false;
+                }
+                lastInput = input;
+                updateDisplay();
+            }
+
+            function clearDisplay(){
+                displayText = "0";
+                finalDisplayText = "";
+                lastInput = "0";
+                isDecimal = false;
+                newOperation = false;
+                canBeNegative = true;
+                currentNum = 0;
+                finalNum = 0;
+                updateFinalDisplay(0);
+                updateOperationDisplay("");
+                updateDisplay();
+            }
+            
+
+        </script>
+    </head>
+    <body>
+        <div class="container" id="calculator">
+            <h3 class="text-center">JavaScript Calculator</h3>
+            <div id="display-container" class="row">
+                <div class="display col-3">
+                    <h4  id="final-display"></h4>
+                </div>
+                <div class="display col-3">
+                    <h4  id="operation-display"> </h4>
+                </div>
+                <div class="display col-3">
+                    <h4  id="display">0</h4>
+                </div>    
+            </div>    
+            <div class="row">
+                <div >                   
+                    <button class="btn btn-primary" id="seven" onclick="addToDisplay(7)">7</button>
+                </div>
+                <div >
+                    <button class="btn btn-primary" id="eight" onclick="addToDisplay(8)">8</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="nine" onclick="addToDisplay(9)">9</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="multiply" onclick="addToDisplay('*')">x</button>
+                </div>
+            </div>
+            <div class="row">
+                <div >                   
+                    <button class="btn btn-primary" id="four" onclick="addToDisplay(4)">4</button>
+                </div>
+                <div >
+                    <button class="btn btn-primary" id="five" onclick="addToDisplay(5)">5</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="six" onclick="addToDisplay(6)">6</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="subtract"onclick="addToDisplay('-')">-</button>
+                </div>
+            </div>
+            <div class="row">
+                <div >                   
+                    <button class="btn btn-primary" id="one" onclick="addToDisplay(1)">1</button>
+                </div>
+                <div >
+                    <button class="btn btn-primary" id="two" onclick="addToDisplay(2)">2</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="three" onclick="addToDisplay(3)">3</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="add" onclick="addToDisplay('+')">+</button>
+                </div>
+            </div>
+            <div class="row">
+                <div >                   
+                    <button class="btn btn-primary" id="zero" onclick="addToDisplay(0)">0</button>
+                </div>
+                <div >
+                    <button class="btn btn-primary" id="decimal" onclick="addToDisplay('.')">.</button>
+                </div>
+                <div >                
+                    <button class="btn btn-danger" id="equals" onclick="addToDisplay('=')">=</button>
+                </div>
+                <div >                
+                    <button class="btn btn-primary" id="divide" onclick="addToDisplay('/')">/</button>
+                </div>
+            </div>
+            <div class="row">
+                <div >                   
+                    <button class="btn btn-secondary" id="clear" onclick="clearDisplay()">Clear</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
