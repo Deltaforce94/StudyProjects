@@ -1,0 +1,39 @@
+body{
+    background-color: #1b1b32;
+    color: white;
+    text-align: center;
+    font-size: 120%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: #3b3b4f;
+    border-radius: 100%;
+    padding: 12vh;
+    border: solid 0.8vh white;
+} 
+
+.first .btn {
+    border-radius: 30%;
+}
+.second .btn {
+    border-radius: 10%;
+}
+
+#session-time{
+    font-size: 150%;
+}
+
+@media (max-width: 600px) {
+    body{
+        font-size: 80%;
+    }
+    #session-time{
+    font-size: 100%;
+    }
+}
