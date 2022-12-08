@@ -1,0 +1,21 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+
+#canvas {
+    min-height: 600px;
+    min-width: 1200px;
+    background-color: wheat;
+}
+
+.cell:hover {
+    fill: white;
+}
