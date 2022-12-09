@@ -1,0 +1,28 @@
+body {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #9bb190;
+}
+
+#canvas {
+    background-color: #82aa7a;
+    border: 3px solid black;
+    border-radius: 30px;
+    box-shadow: 3px 3px 10px;
+    width: 1000px;
+    height: 650px;
+}
+
+#legend {
+    margin: 20px;
+    height: 50px;
+}
+
+#tooltip {
+    border: 0.5px solid black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px;
+}
